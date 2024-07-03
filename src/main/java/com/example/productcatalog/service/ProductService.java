@@ -1,6 +1,7 @@
 package com.example.productcatalog.service;
 
 import com.example.productcatalog.entity.Category;
+import com.example.productcatalog.entity.Image;
 import com.example.productcatalog.entity.Product;
 import com.example.productcatalog.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,6 @@ public class ProductService {
         product.setName(updatedProduct.getName());
         product.setDescription(updatedProduct.getDescription());
         product.setPrice(updatedProduct.getPrice());
-        product.setImage(updatedProduct.getImage());
         product.setCategory(updatedProduct.getCategory());
         product.setDateAdded(updatedProduct.getDateAdded());
         product.setActive(updatedProduct.isActive());
@@ -39,7 +39,8 @@ public class ProductService {
     }
 
     public List<Product> searchProducts(Category category, String name, Double minPrice, Double maxPrice) {
-        return productRepository.findByFilters(category.getId(), name, minPrice, maxPrice);
+        UUID uuid = category == null ? null : category.getId();
+        return productRepository.findByFilters(uuid, name, minPrice, maxPrice);
     }
 
    public List<Product> findAllByIdAndCategory(Category category) {

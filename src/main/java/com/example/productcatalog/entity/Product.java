@@ -1,14 +1,19 @@
 package com.example.productcatalog.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Product {
@@ -18,9 +23,11 @@ public class Product {
     private String name;
     private String description;
     private double price;
-    private String image;
     @ManyToOne
     private Category category;
     private Date dateAdded;
     private boolean active = Boolean.FALSE;
+
+    public Product() {
+    }
 }
