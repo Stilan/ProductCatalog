@@ -1,27 +1,27 @@
 package com.example.productcatalog.entity;
 
-
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
-@Entity
+@Document(collection = "images")
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Category {
+public class Image {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id = UUID.randomUUID();;
+    private UUID id = UUID.randomUUID();
     private String name;
-    private String description;
-
-    public Category() {
-    }
+    private UUID product;
+    private byte[] data;
 }
